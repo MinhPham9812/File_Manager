@@ -1,4 +1,7 @@
 <?php
+    require_once 'config.php';
+    require_once 'includes/function.php';
+    require_once 'includes/Load.php';
     require_once 'blocks/header.php';
 
     if (isset($_GET['module'])) {
