@@ -56,4 +56,32 @@
             }
             return 'folder';
         }
+
+        public function getTimeModify($fileName, $format = 'Y-m-d H:i:s'){
+            $path = $this->getPath($fileName);
+            if($this->isType($path) == 'file'){
+                return date($format, filectime($path));
+            }
+            return 'folder';
+        }
+
+        public function getPermission($fileName){
+            $path = $this->getPath($fileName);
+            
+            $result =  fileperms($path);
+            
+            $result = substr(sprintf('%o', $result), -4);
+            return $result;
+        }
+
+        public function getOwner($fileName){
+            $path = $this->getPath($fileName);
+            // fileowner() is function get owner of file
+            $ownerID = fileowner($path);
+            //posix_getpwuid() is function get infomation of owner
+            $ownerInfo = posix_getpwuid($ownerID);
+            // get name owner
+            $ownerName = $ownerInfo['name'];
+            return $ownerName;
+        }
     }
