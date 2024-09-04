@@ -59,10 +59,9 @@
 
         public function getTimeModify($fileName, $format = 'Y-m-d H:i:s'){
             $path = $this->getPath($fileName);
-            if($this->isType($path) == 'file'){
-                return date($format, filectime($path));
-            }
-            return 'folder';
+            
+            return date($format, filectime($path));
+
         }
 
         public function getPermission($fileName){
@@ -83,5 +82,13 @@
             // get name owner
             $ownerName = $ownerInfo['name'];
             return $ownerName;
+        }
+
+        public static function getParentDir(){
+            $parentDir = '';
+            if(!empty($_GET['path'])) {
+                $parentDir = urldecode($_GET['path']);
+            }
+            return $parentDir;
         }
     }

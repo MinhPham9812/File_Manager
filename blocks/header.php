@@ -25,7 +25,7 @@
           <a class="nav-link" href="#"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fa fa-plus-square" aria-hidden="true"></i>
+          <a class="nav-link" href="#new_item" data-bs-toggle="modal"><i class="fa fa-plus-square" aria-hidden="true"></i>
  New Item</a>
         </li>
       </ul>

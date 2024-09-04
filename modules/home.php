@@ -1,6 +1,9 @@
 <?php
     $load = new Load();
-    $dataScan = $load->scanDir();
+    
+    $parentDir = Load::getParentDir();
+    
+    $dataScan = $load->scanDir($parentDir);
 ?>
 <table id="myTable">
     <thead>
@@ -20,10 +23,15 @@
                 foreach($dataScan as $item):
                     if($item !== '.DS_Store'):
                     $path = $load->getPath($item);
+                    if($load->isType($path) == 'folder'){
+                        $parentDir = str_replace(_DATA_DIR.'/', '', $path);
+                    }else{
+                        $parentDir = '';
+                    }
         ?>
         <tr>
             <td class="text-center"><input type="checkbox" class="check-item" /></td>
-            <td><a href="?path=<?php echo $path; ?>"><?php echo $load->getTypeIcon($item) .' ' . $item; ?></a></td>
+            <td><a href="?path=<?php echo urlencode($parentDir); ?>"><?php echo $load->getTypeIcon($item) .' ' . $item; ?></a></td>
             <td><?php echo $load->getSize($item);?></td>
             <td><?php echo $load->getTimeModify($item); ?></td>
             <td><?php echo $load->getPermission($item); ?></td>
