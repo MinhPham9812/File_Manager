@@ -20,6 +20,19 @@
         }else{
             $msg = 'Please enter file name';
         }
+    }else if($type=='folder'){
+        if(!empty($name)){
+            $pattern = '~^[\w\s]+$~';
+            if(preg_match($pattern, $name)){
+                $parentDir = Load::getParentDir();
+                Create::createFolder($parentDir, $name);
+                redirect('?path=' . $parentDir);
+            }else{
+                $msg = 'Invalid folder name';
+            }
+        }else{
+            $msg = 'Please enter folder name';
+        }
     }
 
     if(!empty($msg)){
